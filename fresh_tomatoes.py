@@ -14,16 +14,19 @@ main_page_head = '''
     <!-- Bootstrap 3 -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,300,300italic,400italic,500italic,700,700italic" rel="stylesheet" type="text/css">
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <style type="text/css" media="screen">
         body {
             padding-top: 80px;
+            font-family: 'Open Sans',sans-serif;
         }
         #trailer .modal-dialog {
             margin-top: 200px;
-            width: 640px;
-            height: 480px;
+            width: 1080px;
+            height: 720px;
         }
         .hanging-close {
             position: absolute;
@@ -35,14 +38,69 @@ main_page_head = '''
             width: 100%;
             height: 100%;
         }
+        .navbar-inverse {
+            background-image: none;
+            background-repeat: none;
+            background-color: #EAECE8;
+            border-color: #EAECE8;
+        }
+        .navbar-inverse .navbar-brand {
+            color: #58646d;
+            text-shadow: none;
+        }
+        .navbar-fixed-top {
+            top: 0;
+            border-width: 0 0 1px;
+        }
+        .navbar-header {
+            color: #58646d;
+            font-weight: 700 !important;
+        }
         .movie-tile {
+            font-weight: 600 !important;
             margin-bottom: 20px;
             padding-top: 20px;
+            border: 1px solid #EAECE8;
+            border-radius: 5px;
+        }
+        .movie-tile .movieinfo {
+            visibility: hidden;
+            font-size: 14px !important;
+            top: 30%;
+            width: 100%;
+            height: 50%;
+            position: absolute;
+            left: 0;
+            z-index: 1;
+            padding-right: 10%;
+            padding-left: 10%;
+            padding-top: 2px;
         }
         .movie-tile:hover {
-            background-color: #EEE;
+            background-color: #EAECE8;
             cursor: pointer;
         }
+        .movie-tile:hover .movieinfo .moviedetail {
+            visibility: visible;
+            text-align: center;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: #C3D7B3;
+        }
+        .movie-tile:hover .movieinfo .moviedetail::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -15px;
+            border-width: 15px;
+            border-style: solid;
+            border-color: transparent transparent #C3D7B3 transparent;
+        }
+        .movie-tile:hover .movieinfo .moviedetail .storyline{
+            text-align: left;
+            padding: 0 5% 0 5%;
+        }   
         .scale-media {
             padding-bottom: 56.25%;
             position: relative;
@@ -123,8 +181,20 @@ main_page_content = '''
 # A single movie entry html template
 movie_tile_content = '''
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
-    <img src="{poster_image_url}" width="220" height="342">
-    <h2>{movie_title}</h2>
+    <img src="{poster_image_url}" width="198" height="300">
+    <h4>{movie_title}</h4>
+    <h6>{year}</h6>
+    <div class="movieinfo">
+        <div class="moviedetail">
+            <h4><b>" {movie_title} "</b></h4>
+            <h5><b>Stars:</b> {star}</h5>
+            <h5><b>my rating:</b> <mark>{rating}</mark></h5>
+            <div class="storyline">
+                <h5><b>Story is...</b></h5>
+                <h6>{story_line}</h6>
+            </div>
+        </div>
+    </div>
 </div>
 '''
 
@@ -144,6 +214,10 @@ def create_movie_tiles_content(movies):
         # Append the tile for the movie with its content filled in
         content += movie_tile_content.format(
             movie_title=movie.title,
+            year=movie.year,
+            story_line=movie.storyline,
+            star=movie.starring,
+            rating=movie.rating,
             poster_image_url=movie.poster_image_url,
             trailer_youtube_id=trailer_youtube_id
         )

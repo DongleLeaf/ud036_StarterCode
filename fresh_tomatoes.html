@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Fresh Tomatoes!</title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,300,300italic,400italic,500italic,700,700italic" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 80px;
+            font-family: 'Open Sans',sans-serif;
+        }
+        #trailer .modal-dialog {
+            margin-top: 200px;
+            width: 1080px;
+            height: 720px;
+        }
+        .hanging-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            z-index: 9001;
+        }
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+        }
+        .navbar-inverse {
+            background-image: none;
+            background-repeat: none;
+            background-color: #EAECE8;
+            border-color: #EAECE8;
+        }
+        .navbar-inverse .navbar-brand {
+            color: #58646d;
+            text-shadow: none;
+        }
+        .navbar-fixed-top {
+            top: 0;
+            border-width: 0 0 1px;
+        }
+        .navbar-header {
+            color: #58646d;
+            font-weight: 700 !important;
+        }
+        .movie-tile {
+            font-weight: 600 !important;
+            margin-bottom: 20px;
+            padding-top: 20px;
+            border: 1px solid #EAECE8;
+            border-radius: 5px;
+        }
+        .movie-tile .movieinfo {
+            visibility: hidden;
+            font-size: 14px !important;
+            top: 30%;
+            width: 100%;
+            height: 50%;
+            position: absolute;
+            left: 0;
+            z-index: 1;
+            padding-right: 10%;
+            padding-left: 10%;
+            padding-top: 2px;
+        }
+        .movie-tile:hover {
+            background-color: #EAECE8;
+            cursor: pointer;
+        }
+        .movie-tile:hover .movieinfo .moviedetail {
+            visibility: visible;
+            text-align: center;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: #C3D7B3;
+        }
+        .movie-tile:hover .movieinfo .moviedetail::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -15px;
+            border-width: 15px;
+            border-style: solid;
+            border-color: transparent transparent #C3D7B3 transparent;
+        }
+        .movie-tile:hover .movieinfo .moviedetail .storyline{
+            text-align: left;
+            padding: 0 5% 0 5%;
+        }   
+        .scale-media {
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+        .scale-media iframe {
+            border: none;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: white;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+        // Pause the video when the modal is closed
+        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {
+            // Remove the src so the player itself gets removed, as this is the only
+            // reliable way to ensure the video stops playing in IE
+            $("#trailer-video-container").empty();
+        });
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.movie-tile', function (event) {
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+        });
+        // Animate in the movies when the page loads
+        $(document).ready(function () {
+          $('.movie-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+        });
+    </script>
+</head>
+
+  <body>
+    <!-- Trailer Video Modal -->
+    <div class="modal" id="trailer">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
+            <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
+          </a>
+          <div class="scale-media" id="trailer-video-container">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Page Content -->
+    <div class="container">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="DEa508Xmmio" data-toggle="modal" data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/2/2b/Constantine_poster.jpg" width="198" height="300">
+    <h4>Constantine</h4>
+    <h6>2005</h6>
+    <div class="movieinfo">
+        <div class="moviedetail">
+            <h4><b>" Constantine "</b></h4>
+            <h5><b>Stars:</b> Keanu Reeves, Rachel Weisz, Djimon Hounsou</h5>
+            <h5><b>my rating:</b> <mark>9.5</mark></h5>
+            <div class="storyline">
+                <h5><b>Story is...</b></h5>
+                <h6>Supernatural detective John Constantine helps a policewoman prove her sister's death was not a suicide, but something more.</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="bK_Y5LjSJ-Y" data-toggle="modal" data-target="#trailer">
+    <img src="https://images-na.ssl-images-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SY1000_CR0,0,674,1000_AL_.jpg" width="198" height="300">
+    <h4>Iron Man</h4>
+    <h6>2008</h6>
+    <div class="movieinfo">
+        <div class="moviedetail">
+            <h4><b>" Iron Man "</b></h4>
+            <h5><b>Stars:</b> Robert Downey Jr., Gwyneth Paltrow, Terrence Howard</h5>
+            <h5><b>my rating:</b> <mark>8.6</mark></h5>
+            <div class="storyline">
+                <h5><b>Story is...</b></h5>
+                <h6>After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="zHUsYlqbuGM" data-toggle="modal" data-target="#trailer">
+    <img src="https://images-na.ssl-images-amazon.com/images/M/MV5BOGE4NzU1YTAtNzA3Mi00ZTA2LTg2YmYtMDJmMThiMjlkYjg2XkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_SY1000_CR0,0,674,1000_AL_.jpg" width="198" height="300">
+    <h4>Thor</h4>
+    <h6>2011</h6>
+    <div class="movieinfo">
+        <div class="moviedetail">
+            <h4><b>" Thor "</b></h4>
+            <h5><b>Stars:</b> Chris Hemsworth, Anthony Hopkins, Natalie Portman</h5>
+            <h5><b>my rating:</b> <mark>7.8</mark></h5>
+            <div class="storyline">
+                <h5><b>Story is...</b></h5>
+                <h6>The powerful but arrogant god Thor is cast out of Asgard to live amongst humans in Midgard (Earth), where he soon becomes one of their finest defenders.</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="1hPpG4s3-O4" data-toggle="modal" data-target="#trailer">
+    <img src="https://images-na.ssl-images-amazon.com/images/M/MV5BMTk2NTI1MTU4N15BMl5BanBnXkFtZTcwODg0OTY0Nw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg" width="198" height="300">
+    <h4>The Avengers</h4>
+    <h6>2012</h6>
+    <div class="movieinfo">
+        <div class="moviedetail">
+            <h4><b>" The Avengers "</b></h4>
+            <h5><b>Stars:</b> Robert Downey Jr., Chris Evans, Scarlett Johansson</h5>
+            <h5><b>my rating:</b> <mark>8.8</mark></h5>
+            <div class="storyline">
+                <h5><b>Story is...</b></h5>
+                <h6>Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity.</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="FkTybqcX-Yo" data-toggle="modal" data-target="#trailer">
+    <img src="https://images-na.ssl-images-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SY1000_CR0,0,674,1000_AL_.jpg" width="198" height="300">
+    <h4>Captain America: Civil War</h4>
+    <h6>2016</h6>
+    <div class="movieinfo">
+        <div class="moviedetail">
+            <h4><b>" Captain America: Civil War "</b></h4>
+            <h5><b>Stars:</b> Chris Evans, Robert Downey Jr., Scarlett Johansson</h5>
+            <h5><b>my rating:</b> <mark>8.2</mark></h5>
+            <div class="storyline">
+                <h5><b>Story is...</b></h5>
+                <h6>Political interference in the Avengers' activities causes a rift between former allies Captain America and Iron Man.</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="YoHD9XEInc0" data-toggle="modal" data-target="#trailer">
+    <img src="https://images-na.ssl-images-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg" width="198" height="300">
+    <h4>Inception</h4>
+    <h6>2010</h6>
+    <div class="movieinfo">
+        <div class="moviedetail">
+            <h4><b>" Inception "</b></h4>
+            <h5><b>Stars:</b> Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page</h5>
+            <h5><b>my rating:</b> <mark>9.0</mark></h5>
+            <div class="storyline">
+                <h5><b>Story is...</b></h5>
+                <h6>A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="m8e-FF8MsqU" data-toggle="modal" data-target="#trailer">
+    <img src="https://images-na.ssl-images-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SY1000_CR0,0,665,1000_AL_.jpg" width="198" height="300">
+    <h4>Matrix</h4>
+    <h6>1999</h6>
+    <div class="movieinfo">
+        <div class="moviedetail">
+            <h4><b>" Matrix "</b></h4>
+            <h5><b>Stars:</b> Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss</h5>
+            <h5><b>my rating:</b> <mark>9.8</mark></h5>
+            <div class="storyline">
+                <h5><b>Story is...</b></h5>
+                <h6>A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="Rt2LHkSwdPQ" data-toggle="modal" data-target="#trailer">
+    <img src="https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SY1000_CR0,0,640,1000_AL_.jpg" width="198" height="300">
+    <h4>Interstellar</h4>
+    <h6>2014</h6>
+    <div class="movieinfo">
+        <div class="moviedetail">
+            <h4><b>" Interstellar "</b></h4>
+            <h5><b>Stars:</b> Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss</h5>
+            <h5><b>my rating:</b> <mark>9.6</mark></h5>
+            <div class="storyline">
+                <h5><b>Story is...</b></h5>
+                <h6>A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="g8evyE9TuYk" data-toggle="modal" data-target="#trailer">
+    <img src="https://images-na.ssl-images-amazon.com/images/M/MV5BMTk4ODQzNDY3Ml5BMl5BanBnXkFtZTcwODA0NTM4Nw@@._V1_.jpg" width="198" height="300">
+    <h4>The Dark Knight Rises</h4>
+    <h6>2012</h6>
+    <div class="movieinfo">
+        <div class="moviedetail">
+            <h4><b>" The Dark Knight Rises "</b></h4>
+            <h5><b>Stars:</b> Christian Bale, Tom Hardy, Anne Hathaway</h5>
+            <h5><b>my rating:</b> <mark>9.4</mark></h5>
+            <div class="storyline">
+                <h5><b>Story is...</b></h5>
+                <h6>Eight years after the Joker's reign of anarchy, the Dark Knight, with the help of the enigmatic Selina, is forced from his exile to save Gotham City, now on the edge of total annihilation, from the brutal guerrilla terrorist Bane.</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+  </body>
+</html>
