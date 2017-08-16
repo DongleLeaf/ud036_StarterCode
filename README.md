@@ -5,7 +5,11 @@ The Movie Trailer Website project for __Full Stack Web Developer Nanodegree__ pr
 
 ## Project Overview
 
-This project consists of server-side code to store a list of movies, including poster image and trailer URL. It is helpful to learn how to write an application using object-oriented Python, and how to make application serve HTML via a web server.
+This project consists of server-side code to store a list of movies, including poster image and trailer URL.
+
+It is helpful to learn how to write an application using object-oriented Python, 
+
+and how to make application serve HTML via a web server.
 
 
 ### Requirements
@@ -28,6 +32,7 @@ If you already meet the requirements, clone this repository or download the ZIP 
 ### How to run
 
 Open a command prompt, and go to the directory where this project installed.
+
 Then, you can type the following command.
 ```
 python entertainment_center.py
